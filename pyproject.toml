@@ -20,6 +20,7 @@ aiosqlite = "^0.20.0"
 pytest = "^8.0.2"
 pdoc3 = "^0.10.0"
 black = "^24.2.0"
+lazydocs = "^0.4.8"
 
 [tool.poetry.scripts]
 server = "server:server"
