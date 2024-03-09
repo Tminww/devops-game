@@ -13,12 +13,16 @@ pydantic = "^2.6.3"
 pydantic-settings = "^2.2.1"
 uvicorn = "^0.28.0"
 sqlalchemy = "^2.0.28"
+aiosqlite = "^0.20.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.2"
 pdoc3 = "^0.10.0"
 black = "^24.2.0"
+
+[tool.poetry.scripts]
+server = "server:server"
 
 [build-system]
 requires = ["poetry-core"]
