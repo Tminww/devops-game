@@ -20,7 +20,8 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 from src.config import settings
 from src.models.base import Base
-from src.models.users import UserEntity
+from src.models.user import UserEntity
+from src.models.field import FieldEntity
 
 target_metadata = Base.metadata
 # target_metadata = None

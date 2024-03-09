@@ -1,8 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import (
     String,
-    UniqueConstraint,
-    ForeignKey,
 )
 
 from src.models.base import Base
