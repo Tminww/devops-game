@@ -24,6 +24,7 @@ lazydocs = "^0.4.8"
 
 [tool.poetry.scripts]
 server = "server:server"
+docs = "documentation:generate_docs"
 
 [build-system]
 requires = ["poetry-core"]

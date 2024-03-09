@@ -24,7 +24,7 @@
 
 ---
 
-#### <kbd>property</kbd> DATABASE_URL
+#### <kbd>property</kbd> Settings.DATABASE_URL
 
 
 
@@ -32,7 +32,7 @@
 
 ---
 
-#### <kbd>property</kbd> model_extra
+#### <kbd>property</kbd> Settings.model_extra
 
 Get extra fields set during validation. 
 
@@ -43,7 +43,7 @@ Get extra fields set during validation.
 
 ---
 
-#### <kbd>property</kbd> model_fields_set
+#### <kbd>property</kbd> Settings.model_fields_set
 
 Returns the set of fields that have been explicitly set on this model instance. 
 
