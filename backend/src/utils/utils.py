@@ -43,9 +43,10 @@ class GameField:
 
     def get_field(self):
         self.matrix = [
-            [random.randint(1, 9) for _ in range(self.column)] for _ in range(self.row)
+            [random.randint(0, 9) for _ in range(self.column)] for _ in range(self.row)
         ]
         self.__symmetry()
+        self.__set_walls()
         self.__set_users_position()
         return self.matrix
 
@@ -63,8 +64,13 @@ class GameField:
             for j in range(self.column):
                 self.matrix[self.row - 1 - i][self.column - 1 - j] = self.matrix[i][j]
 
-    def print_field(self):
+    def __set_walls(self):
+        for i in range(self.row):
+            if i % 2 != 0:
+                self.matrix[i][self.column - 1] = -1
 
-        for row in self.matrix:
+    def print_field(field):
+
+        for row in field:
 
             print(*row)

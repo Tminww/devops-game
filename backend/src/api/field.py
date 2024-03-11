@@ -5,8 +5,8 @@ from src.services.field import FieldService
 from src.utils import utils
 
 from src.schemas.field import (
-    FieldRequestShema,
-    FieldResponseShema,
+    FieldRequestSchema,
+    FieldResponseSchema,
 )
 
 
@@ -16,16 +16,10 @@ router = APIRouter(
 )
 
 
-# @router.get("", response_model=None)
-# async def get_results(field: utils.GameField):
-#     field = utils.Field(row=21, column=47)
-#     return {"message": "success", "field": field.get_field()}
-
-
 @router.post("")
-async def get_results(
+async def set_field(
     field_service: Annotated[FieldService, Depends(field_service)],
-    parameters: FieldRequestShema,
-):
-    response = await field_service.set_field(parameters)
-    return {"message": "success", "response": response}
+    parameters: FieldRequestSchema,
+) -> FieldResponseSchema:
+    response = await field_service.set_field(parameters=parameters)
+    return response
