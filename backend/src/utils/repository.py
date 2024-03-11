@@ -5,7 +5,8 @@ from src.schemas.field import (
     FieldRequestShema,
     FieldResponseShema,
 )
-from src.models.field import FieldEntity
+from src.models.fields import FieldEntity
+from src.models.results import FieldEntity
 from sqlalchemy import (
     insert,
     select,
