@@ -31,10 +31,10 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .greetings h1,
+/* @media (min-width: 1024px) { */
+  /* .greetings h1,
   .greetings h3 {
     text-align: left;
-  }
-}
+  } */
+/* } */
 </style>
