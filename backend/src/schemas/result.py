@@ -12,3 +12,7 @@ class ResultSchema(BaseModel):
     first_user: UserSchema
     second_user: UserSchema
     created: datetime
+
+
+class ResultResponseSchema(BaseModel):
+    response: List[ResultSchema]

@@ -7,6 +7,7 @@ from src.utils import utils
 
 from src.schemas.result import (
     ResultSchema,
+    ResultResponseSchema,
 )
 
 router = APIRouter(
@@ -19,6 +20,6 @@ router = APIRouter(
 async def get_results(
     result_service: Annotated[ResultService, Depends(result_service)],
     limit: int = 10,
-) -> ResultSchema:
-    response = await result_service.set_field(limit)
-    return response
+) -> ResultResponseSchema:
+    response = await result_service.get_result(limit)
+    return ResultResponseSchema(response=response)

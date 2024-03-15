@@ -11,3 +11,4 @@ class FieldEntity(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     field: Mapped[str] = mapped_column(Text)
     created: Mapped[datetime] = mapped_column(DateTime)
+    is_complete: Mapped[bool] = mapped_column(default=0)

@@ -11,11 +11,7 @@ from src.schemas.result import (
 )
 from src.models.fields import FieldEntity
 from src.models.results import ResultEntity
-from sqlalchemy import (
-    insert,
-    select,
-    func,
-)
+from sqlalchemy import insert, select
 from src.database.setup import async_session_maker
 
 
@@ -23,6 +19,10 @@ class AbstractRepository(ABC):
 
     @abstractmethod
     async def set_field(parameters: FieldDatabaseSchema):
+        raise NotImplementedError
+
+    @abstractmethod
+    async def get_result(limit: int):
         raise NotImplementedError
 
 
@@ -33,7 +33,7 @@ class SQLAlchemyRepository(AbstractRepository):
     async def set_field(
         self,
         parameters: FieldDatabaseSchema,
-    ):
+    ) -> FieldResponseSchema:
         async with async_session_maker() as session:
             stmt = (
                 insert(self.field)
@@ -67,22 +67,20 @@ class SQLAlchemyRepository(AbstractRepository):
     async def get_result(
         self,
         limit: int,
-    ):
+    ) -> list:
         async with async_session_maker() as session:
             pass
-            # select(
-            #         self.result.name.label("name"),
-            #         func.count().label("count"),
-            #     )
-            #     .select_from(self.document)
-            #     .join(self.region, self.document.id_reg == self.region.id)
-            #     .join(self.act, self.document.id_act == self.act.id)
-            #     .filter(
-            # res = await session.execute(stmt)
+            stmt = (
+                select(
+                    self.result.id_field,
+                    self.result.username,
+                    self.result.score,
+                )
+                .select_from(self.result)
+                .join(self.field, self.field.id == self.result.id_field)
+                .where(self.field.is_complete == 1)
+                .limit(limit)
+            )
+            res = await session.execute(stmt)
 
-            # return FieldResponseSchema(
-            #     first_user=parameters.first_user,
-            #     second_user=parameters.second_user,
-            #     field=parameters.field,
-            #     id=id_field,
-            # )
+            return res.all()
