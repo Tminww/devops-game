@@ -3,15 +3,12 @@ from pydantic import BaseModel, validator
 from typing import Optional, List
 
 
+class UserSchema(BaseModel):
+    username: str
+    score: int
+
+
 class ResultSchema(BaseModel):
-    first_user: str
-    second_user: str
-
-
-class FieldDatabaseSchema(FieldRequestSchema):
-    field: List[list]
-
-
-class FieldResponseSchema(FieldRequestSchema):
-    id: int
-    field: List[list]
+    first_user: UserSchema
+    second_user: UserSchema
+    created: datetime

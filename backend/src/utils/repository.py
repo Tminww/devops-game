@@ -6,6 +6,9 @@ from src.schemas.field import (
     FieldResponseSchema,
     FieldDatabaseSchema,
 )
+from src.schemas.result import (
+    ResultSchema,
+)
 from src.models.fields import FieldEntity
 from src.models.results import ResultEntity
 from sqlalchemy import (
@@ -34,7 +37,7 @@ class SQLAlchemyRepository(AbstractRepository):
         async with async_session_maker() as session:
             stmt = (
                 insert(self.field)
-                .values(field=str(parameters.field))
+                .values(field=str(parameters.field), created=datetime.now())
                 .returning(self.field.id)
             )
             res = await session.execute(stmt)
@@ -60,3 +63,26 @@ class SQLAlchemyRepository(AbstractRepository):
                 field=parameters.field,
                 id=id_field,
             )
+
+    async def get_result(
+        self,
+        limit: int,
+    ):
+        async with async_session_maker() as session:
+            pass
+            # select(
+            #         self.result.name.label("name"),
+            #         func.count().label("count"),
+            #     )
+            #     .select_from(self.document)
+            #     .join(self.region, self.document.id_reg == self.region.id)
+            #     .join(self.act, self.document.id_act == self.act.id)
+            #     .filter(
+            # res = await session.execute(stmt)
+
+            # return FieldResponseSchema(
+            #     first_user=parameters.first_user,
+            #     second_user=parameters.second_user,
+            #     field=parameters.field,
+            #     id=id_field,
+            # )
