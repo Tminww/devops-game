@@ -1,4 +1,4 @@
-from src.api.board import router as router_board
+from src.api.result import router as router_board
 from src.api.field import router as router_field
 
 

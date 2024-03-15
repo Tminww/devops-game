@@ -17,6 +17,7 @@ from src.database.setup import async_session_maker
 
 
 class AbstractRepository(ABC):
+
     @abstractmethod
     async def set_field(parameters: FieldDatabaseSchema):
         raise NotImplementedError
