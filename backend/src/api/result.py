@@ -22,4 +22,4 @@ async def get_results(
     limit: int = 10,
 ) -> ResultResponseSchema:
     response = await result_service.get_result(limit)
-    return ResultResponseSchema(response=response)
+    return response

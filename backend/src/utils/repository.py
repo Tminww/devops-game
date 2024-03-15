@@ -8,10 +8,11 @@ from src.schemas.field import (
 )
 from src.schemas.result import (
     ResultSchema,
+    UserSchema,
 )
 from src.models.fields import FieldEntity
 from src.models.results import ResultEntity
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select, desc
 from src.database.setup import async_session_maker
 
 
@@ -69,18 +70,43 @@ class SQLAlchemyRepository(AbstractRepository):
         limit: int,
     ) -> list:
         async with async_session_maker() as session:
-            pass
+
             stmt = (
-                select(
-                    self.result.id_field,
-                    self.result.username,
-                    self.result.score,
-                )
-                .select_from(self.result)
-                .join(self.field, self.field.id == self.result.id_field)
+                select(self.field.id, self.field.created)
                 .where(self.field.is_complete == 1)
                 .limit(limit)
+                .order_by(desc(self.field.created))
             )
             res = await session.execute(stmt)
 
-            return res.all()
+            complete_games = res.all()
+            print("-----------------", complete_games)
+
+            response = []
+            for id_field, created in complete_games:
+
+                stmt = select(
+                    self.result.username,
+                    self.result.score,
+                ).where(self.result.id_field == id_field)
+
+                res = await session.execute(stmt)
+                game_result = res.all()
+
+                print("--------------", game_result, game_result[0], game_result[1])
+
+                response.append(
+                    ResultSchema(
+                        first_user=UserSchema(
+                            username=game_result[0][0],
+                            score=game_result[0][1],
+                        ),
+                        second_user=UserSchema(
+                            username=game_result[1][0],
+                            score=game_result[1][1],
+                        ),
+                        created=created,
+                    )
+                )
+
+            return response

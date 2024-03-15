@@ -1,21 +1,29 @@
 import random
+import logging
 
-# ROW_COUNT = 21
-# COLUMN_COUNT = 47
 
-row = 21
-column = 47
+def get_logger(logger_name: str) -> logging:
+    logger = logging.getLogger(logger_name)
+    logger.setLevel(logging.DEBUG)
+    # создаем обработчик для файла и
+    # установим уровень отладки
+    ch = logging.FileHandler("./src/log/backend.log", "a")
+    # ch.setLevel(logging.DEBUG)
 
-# 1. Белый
-# 2. Ярко-красный
-# 3. Зеленый
-# 4. Ярко-зеленый
-# 5. Синий
-# 6. Светло-синий
-# 7. Желтый
-# 8. Розовый
-# 9. Оранжевый
-# 0. Черный (стены, цвет не доступен для выбора)
+    # строка формата сообщения
+    strfmt = "[%(asctime)s] [%(name)s] [%(levelname)s] > %(message)s"
+    # строка формата времени
+    datefmt = "%Y-%m-%d %H:%M:%S"
+    # создаем форматтер
+    formatter = logging.Formatter(fmt=strfmt, datefmt=datefmt)
+
+    # добавляем форматтер к 'ch'
+    ch.setFormatter(formatter)
+    # добавляем ch в регистратор
+    logger.addHandler(ch)
+    # вызов функций, регистрирующих
+    # события в коде
+    return logger  # type: ignore
 
 
 class GameField:
@@ -31,6 +39,19 @@ class GameField:
         "9": "Оранжевый",
         "0": "Черный",
     }
+    row = 21
+    column = 47
+
+    # 1. Белый
+    # 2. Ярко-красный
+    # 3. Зеленый
+    # 4. Ярко-зеленый
+    # 5. Синий
+    # 6. Светло-синий
+    # 7. Желтый
+    # 8. Розовый
+    # 9. Оранжевый
+    # 0. Черный (стены, цвет не доступен для выбора)
 
     def __init__(self, row, column) -> None:
         self.row = row

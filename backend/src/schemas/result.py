@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from pydantic import BaseModel, validator
+from pydantic import BaseModel
 from typing import Optional, List
 
 
@@ -16,3 +16,4 @@ class ResultSchema(BaseModel):
 
 class ResultResponseSchema(BaseModel):
     response: List[ResultSchema]
+    count: int

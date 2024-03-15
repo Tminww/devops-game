@@ -1,22 +1,36 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex'
+import { api } from '@/api/api.js'
 
 // Create a new store instance.
 const store = createStore({
-  state() {
-    return {
-      count: 0,
-    };
-  },
+	state() {
+		return {
+			result: [],
+		}
+	},
 
-  getters: {},
+	getters: {
+		getResult(state) {
+			return state.result
+		},
+	},
 
-  mutations: {
-    increment(state) {
-      state.count++;
-    },
-  },
+	mutations: {
+		setResult(state, newValue) {
+			state.result = newValue
+		},
+	},
 
-  actions: {},
-});
+	actions: {
+		dropResult(context) {
+			context.commit('setResult', [])
+		},
 
-export default store;
+		async loadResultAPI(context) {
+			const result = await api.result.getResults()
+			context.commit('setResult', result)
+		},
+	},
+})
+
+export default store
