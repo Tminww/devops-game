@@ -5,10 +5,16 @@
 		</template>
 		<template v-else-if="loading">
 			<!-- loader -->
-			<progress></progress>
+			<div class="loader"></div>
 		</template>
 
-		<div class="flex-container" v-else>
+		<div v-else-if="getResult.count == 0">
+			<h1 class="blue">
+					Результатов нет
+				</h1>
+		</div>
+
+		<div v-else class="flex-container">
 			<div>
 				<h1 class="blue">
 					Результаты последних {{ getResult.count }} игр
@@ -82,6 +88,25 @@
 </script>
 
 <style>
+	/* HTML: <div class="loader"></div> */
+	.loader {
+	width: 15px;
+	color: rgb(18, 91, 201);
+	aspect-ratio: 1;
+	border-radius: 50%;
+	clip-path: inset(-45px);
+	box-shadow: -60px 15px,-60px 15px,-60px 15px;
+	transform: translateY(-15px);
+	animation: l19 1s infinite linear;
+	}
+	@keyframes l19{ 
+	16.67% {box-shadow:-60px 15px,-60px 15px,19px 15px}
+	33.33% {box-shadow:-60px 15px,  0px 15px,19px 15px}
+	40%,60%{box-shadow:-19px 15px,  0px 15px,19px 15px}
+	66.67% {box-shadow:-19px 15px,  0px 15px,60px 15px}
+	83.33% {box-shadow:-19px 15px, 60px 15px,60px 15px}
+	100%   {box-shadow: 60px 15px, 60px 15px,60px 15px}
+	}
 	.flex-container {
 		display: flex;
 		flex-direction: column;

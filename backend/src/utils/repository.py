@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+import time
 
 from src.schemas.field import (
     FieldRequestSchema,
@@ -70,7 +71,7 @@ class SQLAlchemyRepository(AbstractRepository):
         limit: int,
     ) -> list:
         async with async_session_maker() as session:
-
+            # time.sleep(2)
             stmt = (
                 select(self.field.id, self.field.created)
                 .where(self.field.is_complete == 1)

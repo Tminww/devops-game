@@ -17,13 +17,13 @@
         height="125"
       /> -->
 			<nav>
-				<RouterLink to="/">Смотреть результаты</RouterLink>
-				<RouterLink to="/field">Играть</RouterLink>
+				<router-link :to="{ name: 'result'}">Смотреть результаты</router-link>
+				<router-link :to="{ name: 'field'}">Играть</router-link>
 			</nav>
 		</div>
 	</header>
 
-	<RouterView />
+	<router-view />
 </template>
 
 <style scoped>
