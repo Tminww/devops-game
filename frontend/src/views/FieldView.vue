@@ -1,12 +1,19 @@
 <template>
 	<div class="result">
-		<div v-for="row in "
-		<icon-hexagon :color="'blue'"> </icon-hexagon>
+		<div v-for="(x, row) in getField">
+			<div v-for="(y, column) in row">
+				<icon-hexagon :color="column" :xCoord="x" :yCoord="y">
+				</icon-hexagon>
+			</div>
+		</div>
+
+		<div>{{ getField }}</div>
 	</div>
 </template>
 
 <script lang="js">
 	import IconHexagon from '../components/icons/IconHexagon.vue';
+	import { mapGetters, mapActions } from 'vuex'
 
 	export default {
 		name: "field-view",
@@ -15,13 +22,50 @@
 		},
 		data(){
 			return{
-				"first_user": "string",
-  "second_user": "string",
-  "id": 1,
-  "field": [
+				loading: false,
+				error: null,
+
 
 			}
-		}
+		},
+		computed: {
+			...mapGetters([
+				'getField',
+				'getFieldId',
+				'getFirstUser',
+				'getSecondUser',
+			]),
+
+		},
+
+		methods: {
+			...mapActions([
+				'loadFieldAPI',
+				"dropField",
+			]),
+			async loadField() {
+				try {
+					this.loading = true
+					this.error = null
+
+					await this.loadFieldAPI()
+				} catch (e) {
+					this.error = e.message
+					this.dropField()
+				} finally {
+					this.loading = false
+				}
+			},
+		},
+
+
+
+		async mounted() {
+			console.log("Mounted")
+			await this.loadField()
+
+		},
+
 	};
 </script>
 

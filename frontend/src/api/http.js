@@ -12,7 +12,8 @@ const http = {
 		return (await axios.get(`/${path}/${params}`)).data
 	},
 	async post(path, body) {
-		return
+		console.log(this.baseUrl, path)
+		return (await axios.post(`/${path}`, body)).data
 	},
 	setUrl(url) {
 		axios.defaults.baseURL = url

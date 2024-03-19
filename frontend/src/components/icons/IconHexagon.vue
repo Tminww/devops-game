@@ -25,18 +25,32 @@ l-905 1568 -2685 0 -2685 0 -1339 -2321z"
 	export default {
 		name: "icon-hexagon",
 		props: {
-		color: { type: String, required: true },
+			color: { type: Number, required: true },
+			xCoord: { type: Number, required: true},
+			yCoord: { type: Number, required: true},
+
 	},
 		data(){
 			return {
-				xCoord: 0,
-				yCoord: 0,
+				colors: {
+					1: "white",
+					2: "Ярко-красный",
+					3: "Зеленый",
+					4: "Ярко-зеленый",
+					5: "blue",
+					6: "Светло-синий",
+					7: "yellow",
+					8: "pink",
+					9: "orange",
+					0: "black",
+	   }
+
 
 			}
 		},
 		computed:{
 			getCurrentColor(){
-				console.log(self.color)
+				console.log(colors[self.color])
 
 				return self.color
 			}
