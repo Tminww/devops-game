@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-<a href="../src/api/routers.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../../backend/src/api/routers.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 # <kbd>module</kbd> `api.routers`
 
