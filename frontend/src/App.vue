@@ -17,8 +17,10 @@
         height="125"
       /> -->
 			<nav>
-				<router-link :to="{ name: 'result'}">Смотреть результаты</router-link>
-				<router-link :to="{ name: 'field'}">Играть</router-link>
+				<router-link :to="{ name: 'result' }"
+					>Смотреть результаты</router-link
+				>
+				<router-link :to="{ name: 'field' }">Играть</router-link>
 			</nav>
 		</div>
 	</header>
