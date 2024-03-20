@@ -39,7 +39,7 @@ class SQLAlchemyRepository(AbstractRepository):
         async with async_session_maker() as session:
             stmt = (
                 insert(self.field)
-                .values(field=str(parameters.field), created=datetime.now())
+                .values(field=str(parameters.field), created=datetime.now(), is_complete=bool(1))
                 .returning(self.field.id)
             )
             res = await session.execute(stmt)

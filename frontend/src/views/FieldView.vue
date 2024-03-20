@@ -1,13 +1,17 @@
 <template>
-	<div class="result">
-		<div v-for="(x, row) in getField">
-			<div v-for="(y, column) in row">
-				<icon-hexagon :color="column" :xCoord="x" :yCoord="y">
+	<div class="field">
+		<div class="flex-container">
+			<div class="flex-row" v-for="(rowItem, xIndex) in getField">
+				<icon-hexagon
+					v-for="(columnItem, yIndex) in rowItem"
+					class="flex-item"
+					:color="columnItem"
+					:xCoord="xIndex"
+					:yCoord="yIndex"
+				>
 				</icon-hexagon>
 			</div>
 		</div>
-
-		<div>{{ getField }}</div>
 	</div>
 </template>
 
@@ -79,18 +83,25 @@
 
 	.flex-row {
 		display: flex;
+		margin: 15px;
+		padding: 0px;
 		flex-direction: row;
+		justify-content: flex-start;
+	}
+	.flex-item {
+		display: flex;
+		margin-right: 8px;
+		margin-bottom: -30px;
+		padding: 0px;
+		flex-direction: row;
+		justify-content: flex-start;
 	}
 
-	.flex-row:hover {
-		background-color: hsla(224, 48%, 47%, 0.301);
-		border-radius: 10px;
+	.flex-row:nth-child(odd) {
+		margin-right: 50px;
+		padding: 0px;
 	}
 
-	.flex-row > div {
-		margin: 10px;
-	}
-	/* @media (min-width: 1024px) { */
 	.field {
 		min-height: 100%;
 		display: flex;

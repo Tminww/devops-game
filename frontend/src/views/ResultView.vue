@@ -85,7 +85,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	/* HTML: <div class="loader"></div> */
 	.loader {
 		width: 15px;

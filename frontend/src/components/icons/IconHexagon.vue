@@ -4,12 +4,13 @@
 		height="989.000000pt"
 		viewBox="0 0 1280.000000 989.000000"
 		class="hexagon"
-		:style="{ fill: color }"
+		:style="{
+			fill: getCurrentColor,
+			stroke: getUserColor,
+			'stroke-width': getUserWidth + 'px',
+		}"
 	>
-		<g
-			transform="translate(0.000000,989.000000) scale(0.100000,-0.100000)"
-			stroke="none"
-		>
+		<g transform="translate(0.000000,989.000000) scale(0.100000,-0.100000)">
 			<path
 				d="M2516 7269 c-1164 -2018 -1337 -2323 -1329 -2342 6 -12 303 -528 660
 -1147 357 -619 955 -1655 1329 -2302 l679 -1178 2685 0 2686 0 619 1072 c1721
@@ -33,12 +34,12 @@ l-905 1568 -2685 0 -2685 0 -1339 -2321z"
 		data(){
 			return {
 				colors: {
-					1: "white",
-					2: "Ярко-красный",
-					3: "Зеленый",
-					4: "Ярко-зеленый",
+					1: "gray",
+					2: "red",
+					3: "green",
+					4: "lightgreen",
 					5: "blue",
-					6: "Светло-синий",
+					6: "lightblue",
 					7: "yellow",
 					8: "pink",
 					9: "orange",
@@ -49,11 +50,53 @@ l-905 1568 -2685 0 -2685 0 -1339 -2321z"
 			}
 		},
 		computed:{
-			getCurrentColor(){
-				console.log(colors[self.color])
+			getCurrentColor() {
+				console.log("COLOR", this.color)
+				// Получаем значение цвета из пропсов
+				const colorValue = this.color %10;
 
-				return self.color
-			}
+
+				// Проверяем, есть ли такой цвет в массиве colors
+				if (colorValue in this.colors) {
+					// Если есть, возвращаем соответствующее значение
+					return this.colors[colorValue];
+				} else {
+					// Если цвет не найден, возвращаем "Unknown" или что-то другое по вашему усмотрению
+					return "transparent";
+				}
+			},
+			getUserColor(){
+				const userColor = Math.floor(this.color / 10);
+				console.log(userColor)
+				if (userColor ==  1) {
+					// Если есть, возвращаем соответствующее значение
+					return "darkred";
+				} else if (userColor ==  2){
+					// Если цвет не найден, возвращаем "Unknown" или что-то другое по вашему усмотрению
+					return "darkblue";
+				}else{
+					return "none";
+				}
+
+
+			},
+			getUserWidth(){
+				const userColor =  Math.floor(this.color / 10);
+				console.log("getUserWidth" + userColor)
+
+				if (userColor !==  0) {
+					console.log("!!!!!!!!!!!!!!!!! return 20")
+					// Если есть, возвращаем соответствующее значение
+					return 2000;
+
+				}else{
+					return 0;
+				}
+
+
+			},
+
+
 		}
 
 	};
@@ -61,11 +104,12 @@ l-905 1568 -2685 0 -2685 0 -1339 -2321z"
 
 <style scoped>
 	.hexagon {
-		position: absolute;
-		width: 50px;
-		height: 50px;
+		/* position: absolute; */
+		padding: 0px;
+		margin: -15px;
+		width: 35px;
+		height: 35px;
 		transform: rotate(30deg);
-		transition: fill 1s;
 	}
 	.hexagon:hover {
 		fill: #070a24;
