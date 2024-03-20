@@ -3,7 +3,7 @@ version: "3.7"
 services:
   backend:
     build: ./backend/
-    container_name: backend
+    container_name: game-backend
     restart: unless-stopped
     # volumes:
     #   - ./backend/src:/code/
@@ -12,7 +12,7 @@ services:
 
   frontend:
     build: ./frontend/
-    container_name: frontend
+    container_name: game-frontend
     restart: unless-stopped
     # volumes:
     #   - './frontend:/code/'
