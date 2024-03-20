@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  backend:
+    build: ./backend/
+    container_name: backend
+    restart: unless-stopped
+    # volumes:
+    #   - ./backend/src:/code/
+    ports:
+      - "8000:80"
+
+  frontend:
+    build: ./frontend/
+    container_name: frontend
+    restart: unless-stopped
+    # volumes:
+    #   - './frontend:/code/'
+    #   - '/code/node_modules'
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
